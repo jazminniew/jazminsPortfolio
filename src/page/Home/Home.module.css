@@ -1,0 +1,150 @@
+.home {
+  --home-bg: none;
+  position: relative;
+  display: flex;
+  height: 100vh; /* fuerza 100% de alto exacto */
+  overflow: hidden;
+
+  background-image: var(--home-bg);
+  background-repeat: no-repeat;
+  background-size: auto 100%; /* ancho auto, altura 100% */
+  background-position: center center;
+  background-color: #8A8D96;
+  background-attachment: fixed;
+}
+
+
+/* Overlay: oscurece, agrega viñeta y un toque de color */
+.home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 60% at 20% 10%, rgba(124,58,237,.20), transparent 60%),
+    radial-gradient(50% 50% at 100% 100%, rgba(96,165,250,.18), transparent 60%),
+    rgba(0,0,0,.55);
+  pointer-events: none;
+}
+.container { position: relative; z-index: 1; width: 100%; max-width: 970px; padding: 2rem; }
+
+.card {
+  background: #000;
+  border: 1px solid rgba(255,255,255,.08);
+  justify-content: center;
+  border-radius: 5px;
+  padding: 40px 50px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04),
+    0 22px 60px rgba(0,0,0,.55);
+    margin-top: 45px;
+    margin-left: 340px;
+    height: 340px;
+}
+
+.hero { display:flex; flex-direction:column; gap:1.2rem; align-items:flex-start; text-align:left; }
+
+.title { 
+  font-size: clamp(30px, 6vw, 40px); 
+  font-weight: 800; 
+  line-height: 1.05; 
+}
+.accent {
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 👋 micro-interacción */
+.wave { display:inline-block; margin-left:.35rem; transform-origin: 70% 70%; animation: wave 1.8s ease-in-out infinite; }
+@keyframes wave {
+  0% { transform: rotate(0deg) }
+  15% { transform: rotate(14deg) }
+  30% { transform: rotate(-8deg) }
+  40% { transform: rotate(14deg) }
+  50% { transform: rotate(-4deg) }
+  60% { transform: rotate(10deg) }
+  100% { transform: rotate(0deg) }
+}
+
+.subtitle { color:#a0a0a0; max-width: 60ch; line-height:1.6; }
+
+.btn {
+  /* colores del borde */
+  --c1:#22d3ee;
+  --c2:#60a5fa;
+  --c3:#a78bfa;
+  --radius:999px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+
+  background:
+    linear-gradient(#0b0b0b, #0b0b0b) padding-box,
+    linear-gradient(90deg, var(--c1), var(--c2), var(--c3)) border-box;
+  border:2px solid transparent;
+  border-radius:var(--radius);
+  padding:16px 64px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 14px 32px rgba(0,0,0,.5);
+  cursor:pointer;
+}
+
+/* texto con gradiente (estático) */
+.btnText{
+  font-weight:600;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  background:linear-gradient(90deg, var(--c1), var(--c2) 45%, var(--c3));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.btnContainer {
+  display:flex;
+  justify-content:center; /* centra horizontalmente */
+  align-items:center;      /* por si querés centrar vertical también */
+  width:100%;
+  margin-top:1rem;         /* espacio opcional sobre el botón */
+}
+.btn:hover {
+  /* fondo se ilumina */
+  background:
+    linear-gradient(90deg, #22d3ee, #60a5fa, #a78bfa) padding-box,
+    linear-gradient(#0b0b0b, #0b0b0b) border-box;
+  border: 2px solid transparent;
+  transform: scale(1.03);
+  box-shadow:
+    0 0 20px rgba(96,165,250,.4),
+    0 0 35px rgba(167,139,250,.3);
+  transition: all .25s ease;
+}
+
+/* cuando el botón está en hover, cambiamos el texto */
+.btn:hover .btnText {
+  background: none;           /* quitamos el gradient clip */
+  color: #000;   
+  font-weight: 600;             /* texto negro sólido */
+}
+
+
+/* ajuste responsive */
+@media (max-width: 600px){
+  .btn{ padding:14px 42px; }
+}
+
+
+/* Pequeños ajustes responsive */
+@media (max-width: 720px){
+  .card { border-radius: 16px; }
+  .title { font-size: clamp(28px, 8vw, 42px); }
+}
+
+/* Accesibilidad: respeta usuarios con motion reducido */
+@media (prefers-reduced-motion: reduce) {
+  .wave, .btn:hover .arrow { animation: none; transform: none; }
+}
