@@ -141,18 +141,73 @@ export default function About() {
   const [activeFolder, setActiveFolder] = useState<(typeof folders)[number]>('mis_proyectos')
   const pathSegment = activeFolder.replace('_', '-')
   const contentRef = useRef<HTMLDivElement>(null)
+  
+  // Referencias para cada sección
+  const proyectosRef = useRef<HTMLDivElement>(null)
+  const sobreMiRef = useRef<HTMLDivElement>(null)
+  const contactameRef = useRef<HTMLDivElement>(null)
+  
+  // Estado para saber si el scroll es manual o por clic
+  const isClickScrolling = useRef(false)
 
+  // Scroll automático al hacer clic en una carpeta
   useEffect(() => {
-    if (contentRef.current) {
-      contentRef.current.scrollTop = 120
+    if (isClickScrolling.current) {
+      const sectionRefs = {
+        mis_proyectos: proyectosRef,
+        sobre_mi: sobreMiRef,
+        contactame: contactameRef,
+      }
+      
+      const targetRef = sectionRefs[activeFolder]
+      if (targetRef.current) {
+        targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+      
+      // Resetear el flag después de un tiempo
+      setTimeout(() => {
+        isClickScrolling.current = false
+      }, 1000)
     }
   }, [activeFolder])
 
+  // IntersectionObserver para detectar qué sección está visible
+  useEffect(() => {
+    const options = {
+      root: contentRef.current,
+      rootMargin: '-20% 0px -70% 0px', // Detecta cuando la sección está en el tercio superior
+      threshold: 0,
+    }
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      // Solo actualizar si NO es un scroll por clic
+      if (isClickScrolling.current) return
+
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('data-section') as typeof activeFolder
+          if (sectionId) {
+            setActiveFolder(sectionId)
+          }
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callback, options)
+
+    if (proyectosRef.current) observer.observe(proyectosRef.current)
+    if (sobreMiRef.current) observer.observe(sobreMiRef.current)
+    if (contactameRef.current) observer.observe(contactameRef.current)
+
+    return () => observer.disconnect()
+  }, [])
+
   const renderContent = () => {
-    if (activeFolder === 'mis_proyectos') {
-      return (
-        <>
-          <p className={styles.breadcrumb}>/{pathSegment}</p>
+    return (
+      <>
+        {/* Contenedor 1: Mis Proyectos */}
+        <div className={styles.section} ref={proyectosRef} data-section="mis_proyectos">
+          <p className={styles.breadcrumb}>/mis-proyectos</p>
           <h1 className={styles.contentTitle}>Mis proyectos destacados</h1>
           <p className={styles.contentText}>
             Interfaces minimalistas, experiencias interactivas y productos que mezclan diseño, datos y storytelling.
@@ -182,14 +237,11 @@ export default function About() {
               </a>
             ))}
           </div>
-        </>
-      )
-    }
+        </div>
 
-    if (activeFolder === 'sobre_mi') {
-      return (
-        <>
-          <p className={styles.breadcrumb}>/{pathSegment}</p>
+        {/* Contenedor 2: Sobre Mi */}
+        <div className={styles.section} ref={sobreMiRef} data-section="sobre_mi" style={{ marginTop: '6rem' }}>
+          <p className={styles.breadcrumb}>/sobre-mi</p>
           <h1 className={styles.contentTitle}>¿Quién es Jazmin?</h1>
           <div className={styles.splitColumns}>
             <div>
@@ -206,7 +258,6 @@ export default function About() {
                   </article>
                 ))}
               </div>
-              
               <div className={styles.locationSection}>
                 <div className={styles.locationContent}>
                   <LocationIcon />
@@ -230,7 +281,6 @@ export default function About() {
                   </article>
                 ))}
               </div>
-
               <h2 className={styles.sectionLabel} style={{ marginTop: '2.5rem' }}>estudios</h2>
               <div className={styles.timeline}>
                 {studies.map(study => (
@@ -246,25 +296,24 @@ export default function About() {
               </div>
             </div>
           </div>
-        </>
-      )
-    }
+        </div>
 
-    return (
-      <>
-        <p className={styles.breadcrumb}>/{pathSegment}</p>
-        <h1 className={styles.contentTitle}>Contactame</h1>
-        <p className={styles.contentText}>
-          Si querés crear algo original, creativo y diferente, escribime. Te respondo al toque por los canales de abajo.
-        </p>
-        <div className={styles.contactGrid}>
-          {contactLinks.map(link => (
-            <a key={link.label} className={styles.contactCard} href={link.url} target="_blank" rel="noreferrer">
-              <span className={styles.contactLabel}>{link.label}</span>
-              <span className={styles.contactValue}>{link.value}</span>
-              <span className={styles.contactArrow}>↗</span>
-            </a>
-          ))}
+        {/* Contenedor 3: Contactame */}
+        <div className={styles.section} ref={contactameRef} data-section="contactame" style={{ marginTop: '60rem' }}>
+          <p className={styles.breadcrumb}>/contactame</p>
+          <h1 className={styles.contentTitle}>Contactame</h1>
+          <p className={styles.contentText}>
+            Si querés crear algo original, creativo y diferente, escribime. Te respondo al toque por los canales de abajo.
+          </p>
+          <div className={styles.contactGrid}>
+            {contactLinks.map(link => (
+              <a key={link.label} className={styles.contactCard} href={link.url} target="_blank" rel="noreferrer">
+                <span className={styles.contactLabel}>{link.label}</span>
+                <span className={styles.contactValue}>{link.value}</span>
+                <span className={styles.contactArrow}>↗</span>
+              </a>
+            ))}
+          </div>
         </div>
       </>
     )
@@ -303,7 +352,10 @@ export default function About() {
                 key={folder}
                 type="button"
                 className={`${styles.folderButton} ${activeFolder === folder ? styles.folderButtonActive : ''}`}
-                onClick={() => setActiveFolder(folder)}
+                onClick={() => {
+                  isClickScrolling.current = true
+                  setActiveFolder(folder)
+                }}
                 aria-pressed={activeFolder === folder}
               >
                 <FolderIcon />
