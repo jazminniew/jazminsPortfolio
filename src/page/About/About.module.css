@@ -217,7 +217,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  min-height: 100%;
   scroll-margin-top: 2rem;
 }
 

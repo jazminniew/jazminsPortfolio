@@ -171,36 +171,7 @@ export default function About() {
     }
   }, [activeFolder])
 
-  // IntersectionObserver para detectar qué sección está visible
-  useEffect(() => {
-    const options = {
-      root: contentRef.current,
-      rootMargin: '-20% 0px -70% 0px', // Detecta cuando la sección está en el tercio superior
-      threshold: 0,
-    }
-
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      // Solo actualizar si NO es un scroll por clic
-      if (isClickScrolling.current) return
-
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.getAttribute('data-section') as typeof activeFolder
-          if (sectionId) {
-            setActiveFolder(sectionId)
-          }
-        }
-      })
-    }
-
-    const observer = new IntersectionObserver(callback, options)
-
-    if (proyectosRef.current) observer.observe(proyectosRef.current)
-    if (sobreMiRef.current) observer.observe(sobreMiRef.current)
-    if (contactameRef.current) observer.observe(contactameRef.current)
-
-    return () => observer.disconnect()
-  }, [])
+  // (Scroll-spy desactivado, solo scroll por clic)
 
   const renderContent = () => {
     return (
@@ -299,7 +270,7 @@ export default function About() {
         </div>
 
         {/* Contenedor 3: Contactame */}
-        <div className={styles.section} ref={contactameRef} data-section="contactame" style={{ marginTop: '60rem' }}>
+        <div className={styles.section} ref={contactameRef} data-section="contactame" style={{ marginBottom: '14rem' }}>
           <p className={styles.breadcrumb}>/contactame</p>
           <h1 className={styles.contentTitle}>Contactame</h1>
           <p className={styles.contentText}>
