@@ -376,6 +376,35 @@
   color: rgba(255, 255, 255, 0.75);
 }
 
+.locationSection {
+  margin-top: 1.5rem;
+}
+
+.locationContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.locationTitle {
+  font-size: 1rem;
+  margin: 0;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.locationText {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+}
+
 .timeline {
   display: flex;
   flex-direction: column;

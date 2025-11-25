@@ -42,6 +42,22 @@ const skills = [
   { title: 'Idiomas', items: ['Español (Nativo)', 'Inglés (B2 - First Certificate)'] },
 ]
 
+const LocationIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="locationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#00F29E" />
+        <stop offset="50%" stopColor="#00ADF2" />
+        <stop offset="100%" stopColor="#9F6DFF" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+      fill="url(#locationGradient)"
+    />
+  </svg>
+)
+
 const experiences = [
   {
     role: 'Co-Founder · PipeEye',
@@ -189,6 +205,16 @@ export default function About() {
                     </ul>
                   </article>
                 ))}
+              </div>
+              
+              <div className={styles.locationSection}>
+                <div className={styles.locationContent}>
+                  <LocationIcon />
+                  <div>
+                    <h3 className={styles.locationTitle}>Ubicación</h3>
+                    <p className={styles.locationText}>Palermo, Buenos Aires, Argentina</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div>
