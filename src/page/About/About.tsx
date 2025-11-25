@@ -7,74 +7,107 @@ const folders = ['mis_proyectos', 'sobre_mi', 'contactame'] as const
 
 const projects = [
   {
-    name: 'Pulse OS',
-    description: 'Sistema operativo ficticio para clínicas que visualiza datos biométricos en vivo.',
-    tags: ['React', 'WebGL', 'Realtime'],
-    preview: 'linear-gradient(135deg, rgba(255, 95, 86, 0.8), rgba(255, 189, 46, 0.8))',
-    url: 'https://pulseos.jazmin.dev',
-  },
-  {
-    name: 'Atlas Pay',
-    description: 'Dashboard fintech con KPIs, accesos rápidos y modo oscuro dinámico.',
-    tags: ['Fintech', 'Dashboard', 'UX Lead'],
+    name: 'PipeEye',
+    description: 'Sistema de inspección de ductos industriales potenciado por IA para detección automática de fallas.',
+    tags: ['Industrial', 'AI', 'Pipeline'],
     preview: 'linear-gradient(135deg, rgba(0, 242, 158, 0.8), rgba(0, 173, 242, 0.8))',
-    url: 'https://atlaspay.jazmin.dev',
+    url: 'https://pipeeye.vercel.app',
   },
   {
-    name: 'Nebula XR',
-    description: 'Landing inmersiva con escenas 3D para un estudio creativo.',
-    tags: ['Three.js', 'Motion', 'Storytelling'],
-    preview: 'linear-gradient(135deg, rgba(159, 109, 255, 0.8), rgba(255, 95, 86, 0.8))',
-    url: 'https://nebular.jazmin.dev',
+    name: 'MalarIA',
+    description: 'Herramienta de diagnóstico asistido para la detección temprana de malaria mediante análisis de imágenes.',
+    tags: ['HealthTech', 'Deep Learning', 'Mobile'],
+    preview: 'linear-gradient(135deg, rgba(255, 95, 86, 0.8), rgba(159, 109, 255, 0.8))',
+    url: 'https://malariaa.vercel.app',
   },
   {
-    name: 'Bloom LMS',
-    description: 'Plataforma educativa con focus en microlearning y métricas claras.',
-    tags: ['Edtech', 'Product', 'Accessibility'],
+    name: 'EasyTech',
+    description: 'App educativa diseñada para acercar la tecnología a adultos mayores con una UX 100% accesible.',
+    tags: ['EdTech', 'Accessibility', 'App Mobile'],
     preview: 'linear-gradient(135deg, rgba(0, 173, 242, 0.8), rgba(159, 109, 255, 0.8))',
-    url: 'https://bloom.jazmin.dev',
+  },
+  {
+    name: 'Sin Gluten Company',
+    description: 'Plataforma web y tarjeta de beneficios exclusivos para la comunidad celíaca.',
+    tags: ['Fintech', 'Web Platform', 'Community'],
+    preview: 'linear-gradient(135deg, rgba(255, 189, 46, 0.8), rgba(255, 95, 86, 0.8))',
+    url: 'https://singlutencompany.com.ar',
   },
 ]
 
 const skills = [
-  { title: 'Stack principal', items: ['React + Next.js', 'TypeScript', 'Node.js / Express', 'GSAP / Three.js'] },
-  { title: 'Diseño & producto', items: ['Design systems', 'Prototypado en Figma', 'Microinteracciones', 'UX research'] },
-  { title: 'Tooling', items: ['Vite', 'Vitest / Playwright', 'Storybook', 'CI/CD en Vercel + GitHub'] },
+  { title: 'Stack Tecnológico', items: ['React', 'TypeScript', 'Git / GitHub', 'HTML / CSS Modules'] },
+  { title: 'Diseño', items: ['Figma (Avanzado)', 'Prototipado', 'Diseño UI', 'Responsive Design'] },
+  { title: 'Soft Skills', items: ['Liderazgo', 'Comunicación', 'Gestión de Grupos', 'Pedagogía'] },
+  { title: 'Idiomas', items: ['Español (Nativo)', 'Inglés (B2 - First Certificate)'] },
 ]
 
 const experiences = [
   {
-    role: 'Lead Frontend · Aurora Lab',
+    role: 'Co-Founder · PipeEye',
+    period: '2024 — Actualidad',
+    detail: 'Startup de inspección industrial con IA. Lidero el desarrollo técnico y la visión del producto.',
+  },
+  {
+    role: 'Full Stack Developer · Sin Gluten Company',
+    period: '2024 — Actualidad',
+    detail: 'Desarrollo integral y mantenimiento de la plataforma de beneficios para la comunidad celíaca.',
+  },
+  {
+    role: 'Educadora & Líder de Grupos',
     period: '2023 — Actualidad',
-    detail: 'Dirijo un squad remoto construyendo experiencias financieras con énfasis en performance.',
+    detail: 'Liderazgo en espacios de educación no formal, planificación de actividades y gestión de grupos.',
+  },
+]
+
+const studies = [
+  {
+    title: 'Licenciatura en Tecnología Digital',
+    institution: 'Universidad Torcuato Di Tella',
+    period: '2025 — Actualidad',
+    detail: 'Formación en convergencia de tecnología, negocios y diseño.',
   },
   {
-    role: 'UX Engineer · Studio Norte',
-    period: '2021 — 2023',
-    detail: 'Prototipos interactivos y librerías UI para marcas lifestyle en LATAM.',
+    title: 'Escuela Secundaria (TIC)',
+    institution: 'ORT Argentina',
+    period: '2021 — 2025',
+    detail: 'Bachiller con orientación en Tecnologías de la Información y la Comunicación.',
   },
   {
-    role: 'Frontend Dev · Freelance',
-    period: '2019 — 2021',
-    detail: 'Portfolios, e-commerce y campañas experimentales para artistas y agencias.',
+    title: 'Escuela de Líderes',
+    institution: 'Sociedad Hebraica Argentina',
+    period: '2023 — 2024',
+    detail: 'Formación pedagógica y liderazgo para la gestión de grupos en educación no formal.',
+  },
+  {
+    title: 'First Certificate Exam',
+    institution: 'Cambridge Assessment English',
+    period: '2023',
+    detail: 'Preparación particular y aprobación del examen nivel B2.',
+  },
+  {
+    title: 'Inmersión en Inglés',
+    institution: 'Londres, UK',
+    period: '2023',
+    detail: 'Viaje de perfeccionamiento del idioma y experiencia cultural.',
   },
 ]
 
 const contactLinks = [
   {
     label: 'WhatsApp',
-    value: '+54 9 11 5555-0000',
-    url: 'https://wa.me/5491155550000',
+    value: '+54 9 11 6448-4993',
+    url: 'https://wa.me/5491164484993',
   },
   {
     label: 'Email',
-    value: 'hola@jazmin.dev',
-    url: 'mailto:hola@jazmin.dev',
+    value: 'jazminniew@gmail.com',
+    url: 'mailto:jazminniew@gmail.com',
   },
   {
     label: 'LinkedIn',
-    value: '/in/jazmin-dev',
-    url: 'https://www.linkedin.com/in/jazmin-dev',
+    value: '/in/jazmin-niewiadomski',
+    url: 'www.linkedin.com/in/jazmin-niewiadomski-42200b316',
   },
 ]
 
@@ -141,7 +174,7 @@ export default function About() {
       return (
         <>
           <p className={styles.breadcrumb}>/{pathSegment}</p>
-          <h1 className={styles.contentTitle}>Quién es Jazmin</h1>
+          <h1 className={styles.contentTitle}>¿Quién es Jazmin?</h1>
           <div className={styles.splitColumns}>
             <div>
               <h2 className={styles.sectionLabel}>skills</h2>
@@ -171,6 +204,20 @@ export default function About() {
                   </article>
                 ))}
               </div>
+
+              <h2 className={styles.sectionLabel} style={{ marginTop: '2.5rem' }}>estudios</h2>
+              <div className={styles.timeline}>
+                {studies.map(study => (
+                  <article key={study.title} className={styles.timelineItem}>
+                    <div>
+                      <h3>{study.title}</h3>
+                      <span className={styles.period}>{study.period}</span>
+                    </div>
+                    <p style={{ marginBottom: '0.2rem', color: 'rgba(255,255,255,0.9)' }}>{study.institution}</p>
+                    <p>{study.detail}</p>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </>
@@ -182,7 +229,7 @@ export default function About() {
         <p className={styles.breadcrumb}>/{pathSegment}</p>
         <h1 className={styles.contentTitle}>Contactame</h1>
         <p className={styles.contentText}>
-          Si querés crear algo raro, elegante y veloz, escribime. Te respondo al toque por los canales de abajo.
+          Si querés crear algo original, creativo y diferente, escribime. Te respondo al toque por los canales de abajo.
         </p>
         <div className={styles.contactGrid}>
           {contactLinks.map(link => (
@@ -219,7 +266,7 @@ export default function About() {
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
-            <span>Volver a la landing</span>
+            <span>Volver</span>
           </button>
         </header>
 

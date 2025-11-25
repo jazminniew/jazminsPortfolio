@@ -10,9 +10,9 @@ type TerminalLine = {
 
 const terminalSequence: TerminalLine[] = [
   { type: 'command', text: 'system-check' },
-  { type: 'output', text: '✔ Diseño experiencias web minimalistas' },
-  { type: 'output', text: '✔ Desarrollo interfaces interactivas' },
+  { type: 'output', text: '✔ Diseño y desarrollo experiencias web' },
   { type: 'output', text: '✔ Creo historias digitales con código' },
+  { type: 'output', text: '✔ Lidero grupos de educación no formal' },
   { type: 'command', text: 'open j-computer' },
 ]
 
@@ -102,7 +102,7 @@ export default function Home() {
       <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
         <div className={styles.navContent}>
           <div className={styles.logo}>
-            <span className={styles.logoText}>JN</span>
+            <img src="/favicon.png" alt="Logo" className={styles.logoImg} />
           </div>
           <button className={styles.navBtn} onClick={() => navigate('/sobre-mi')}>
             <span>Ingresar</span>
@@ -126,7 +126,7 @@ export default function Home() {
             </span>
           </h1>
           <p className={styles.heroSubtitle}>
-            Estás por entrar en una experiencia digital minimalista.
+            Estás por entrar en mi portfolio, una experiencia digital.
             <br />
             Conocé quién soy, qué construyo y explorá mi computadora.
           </p>
