@@ -118,9 +118,9 @@ const contactLinks = [
     url: 'https://wa.me/5491164484993',
   },
   {
-    label: 'Email',
+    label: 'Gmail',
     value: 'jazminniew@gmail.com',
-    url: 'mailto:jazminniew@gmail.com',
+    url: 'https://mail.google.com/mail/?view=cm&fs=1&to=jazminniew@gmail.com',
   },
   {
     label: 'LinkedIn',
