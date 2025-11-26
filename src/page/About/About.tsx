@@ -185,7 +185,7 @@ export default function About() {
           <p className={styles.breadcrumb}>/mis-proyectos</p>
           <h1 className={styles.contentTitle}>Mis proyectos destacados</h1>
           <p className={styles.contentText}>
-            Interfaces minimalistas, experiencias interactivas y productos que mezclan diseño, datos y storytelling.
+           Experiencias interactivas y productos que mezclan diseño, datos y storytelling.
           </p>
           <div className={styles.projectsGrid}>
             {projects.map(project => (
