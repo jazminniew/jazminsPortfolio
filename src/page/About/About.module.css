@@ -579,13 +579,13 @@
   }
 
   .computerFrame {
-    width: calc(100vw - 1rem);
+    min-width: 96vw;
     height: calc(100vh - 1rem);
     padding:  1.1rem;
   }
 
   .contentInner {
-    padding: 0.5rem;
+    padding: 2rem 1.4rem;
   }
 
   .sidebar {
