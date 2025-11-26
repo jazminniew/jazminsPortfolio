@@ -125,7 +125,7 @@ const contactLinks = [
   {
     label: 'LinkedIn',
     value: '/in/jazmin-niewiadomski',
-    url: 'www.linkedin.com/in/jazmin-niewiadomski-42200b316',
+    url: 'https://www.linkedin.com/in/jazmin-niewiadomski-42200b316/',
   },
 ]
 
