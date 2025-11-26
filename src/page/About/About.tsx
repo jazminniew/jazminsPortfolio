@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import styles from './About.module.css'
 
 import { useMediaQuery } from 'react-responsive'
+import { FaWhatsapp, FaLinkedin, FaEnvelope, FaGithub } from 'react-icons/fa'
 
 const folders = ['mis_proyectos', 'sobre_mi', 'contactame'] as const
 
@@ -162,20 +163,53 @@ export default function About() {
         sobre_mi: sobreMiRef,
         contactame: contactameRef,
       }
-      
       const targetRef = sectionRefs[activeFolder]
       if (targetRef.current) {
         targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
-      
-      // Resetear el flag después de un tiempo
       setTimeout(() => {
         isClickScrolling.current = false
       }, 1000)
     }
   }, [activeFolder])
 
-  // (Scroll-spy desactivado, solo scroll por clic)
+  // Scroll-spy: cambia la carpeta activa según la sección visible
+  useEffect(() => {
+    const contentEl = contentRef.current;
+    if (!contentEl) return;
+
+    const handleScroll = () => {
+      const sections = [
+        { key: 'mis_proyectos', ref: proyectosRef },
+        { key: 'sobre_mi', ref: sobreMiRef },
+        { key: 'contactame', ref: contactameRef },
+      ];
+      const scrollTop = contentEl.scrollTop;
+      const offset = 80; // margen para considerar el título visible
+      let found: typeof activeFolder = activeFolder;
+      // Detectar si está cerca del final del scroll
+      const nearBottom = contentEl.scrollHeight - contentEl.scrollTop - contentEl.clientHeight < 40;
+      if (nearBottom) {
+        found = 'contactame';
+      } else {
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const ref = sections[i].ref;
+          if (ref.current) {
+            const top = ref.current.offsetTop;
+            if (scrollTop + offset >= top) {
+              found = sections[i].key as typeof activeFolder;
+              break;
+            }
+          }
+        }
+      }
+      if (found !== activeFolder && !isClickScrolling.current) {
+        setActiveFolder(found);
+      }
+    };
+    contentEl.addEventListener('scroll', handleScroll);
+    return () => contentEl.removeEventListener('scroll', handleScroll);
+  }, [activeFolder, isMobile]);
 
   const renderContent = () => {
     return (
@@ -234,8 +268,28 @@ export default function About() {
                 ))}
               </div>
               <div className={styles.locationSection}>
+                {/* GitHub container arriba */}
+                <a
+                  href="https://github.com/jazminniew"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.locationContent}
+                  style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', textDecoration: 'none', position: 'relative', padding: '1.25rem' }}
+                >
+                  <span style={{ marginRight: '1rem', display: 'inline-block' }}>
+                    <FaGithub size={20} color="#fff" />
+                  </span>
+                  <div>
+                    <h3 className={styles.locationTitle} style={{ color: '#fff' }}>GitHub</h3>
+                    <p className={styles.locationText}>jazminniew</p>
+                  </div>
+                  <span className={styles.contactArrow} style={{ position: 'absolute', right: '1.4rem', top: '1.4rem', color: '#fff' }}>↗</span>
+                </a>
+                {/* Ubicación container abajo */}
                 <div className={styles.locationContent}>
-                  <LocationIcon />
+                  <span style={{ marginRight: '1rem', display: 'inline-block' }}>
+                    <LocationIcon />
+                  </span>
                   <div>
                     <h3 className={styles.locationTitle}>Ubicación</h3>
                     <p className={styles.locationText}>Palermo, Buenos Aires, Argentina</p>
@@ -281,13 +335,45 @@ export default function About() {
             Si querés crear algo original, creativo y diferente, escribime. Te respondo al toque por los canales de abajo.
           </p>
           <div className={styles.contactGrid}>
-            {contactLinks.map(link => (
-              <a key={link.label} className={styles.contactCard} href={link.url} target="_blank" rel="noreferrer">
-                <span className={styles.contactLabel}>{link.label}</span>
-                <span className={styles.contactValue}>{link.value}</span>
-                <span className={styles.contactArrow}>↗</span>
-              </a>
-            ))}
+            {contactLinks.map(link => {
+              let Icon = null;
+              const gradientStyle = {
+                background: 'linear-gradient(135deg, #00F29E 0%, #00ADF2 50%, #9F6DFF 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                display: 'inline-block',
+              };
+              if (link.label === 'WhatsApp') {
+                Icon = (
+                  <span style={gradientStyle}>
+                    <FaWhatsapp color="#fff" size={22} />
+                  </span>
+                );
+              } else if (link.label === 'Gmail') {
+                Icon = (
+                  <span style={gradientStyle}>
+                    <FaEnvelope color="#fff" size={22} />
+                  </span>
+                );
+              } else if (link.label === 'LinkedIn') {
+                Icon = (
+                  <span style={gradientStyle}>
+                    <FaLinkedin color="#fff" size={22} />
+                  </span>
+                );
+              }
+              return (
+                <a key={link.label} className={styles.contactCard} href={link.url} target="_blank" rel="noreferrer">
+                  <span className={styles.contactLabel} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    {Icon}
+                    {link.label}
+                  </span>
+                  <span className={styles.contactValue}>{link.value}</span>
+                  <span className={styles.contactArrow}>↗</span>
+                </a>
+              );
+            })}
           </div>
         </div>
       </>

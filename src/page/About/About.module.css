@@ -532,11 +532,21 @@
   opacity: 1;
 }
 
+
 .contactLabel {
   text-transform: uppercase;
   letter-spacing: 0.3em;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.6);
+}
+
+.contactIconGradient {
+  background: linear-gradient(135deg, #00F29E 0%, #00ADF2 50%, #9F6DFF 100%);
+  color: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
 
 .contactValue {

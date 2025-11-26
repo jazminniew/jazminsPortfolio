@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import styles from './Home.module.css'
+import { FaLinkedin } from 'react-icons/fa'
 
 type TerminalLine = {
   type: 'command' | 'output'
@@ -146,6 +147,27 @@ export default function Home() {
                   <span></span>
                 </div>
                 <span className={styles.terminalTitle}>jazmin.exe</span>
+                <a
+                  href="https://www.linkedin.com/in/jazmin-niewiadomski-42200b316/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}
+                  aria-label="LinkedIn"
+                >
+                  <span
+                    style={{
+                      background: 'linear-gradient(135deg, #00F29E 0%, #00ADF2 50%, #9F6DFF 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      display: 'inline-block',
+                      marginLeft: '1rem',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <FaLinkedin color="#fff" size={24} />
+                  </span>
+                </a>
               </div>
               <div className={styles.terminalBody}>
                 {terminalSequence.map((line, index) => (
