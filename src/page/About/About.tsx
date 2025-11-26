@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import styles from './About.module.css'
 
+import { useMediaQuery } from 'react-responsive'
+
 const folders = ['mis_proyectos', 'sobre_mi', 'contactame'] as const
 
 const projects = [
@@ -137,6 +139,8 @@ const FolderIcon = () => (
 )
 
 export default function About() {
+  const isMobile = useMediaQuery({ maxWidth: 640 })
+  const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
   const [activeFolder, setActiveFolder] = useState<(typeof folders)[number]>('mis_proyectos')
   const pathSegment = activeFolder.replace('_', '-')
@@ -306,7 +310,9 @@ export default function About() {
             <span></span>
             <span></span>
           </div>
-          <span className={styles.path}>/Jazmin/{pathSegment}</span>
+          {!isMobile && (
+            <span className={styles.path}>/Jazmin/{pathSegment}</span>
+          )}
           <button className={styles.backBtn} type="button" onClick={() => navigate('/')}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -318,21 +324,66 @@ export default function About() {
 
         <div className={styles.body}>
           <nav className={styles.sidebar} aria-label="Secciones dentro de la computadora">
-            {folders.map(folder => (
-              <button
-                key={folder}
-                type="button"
-                className={`${styles.folderButton} ${activeFolder === folder ? styles.folderButtonActive : ''}`}
-                onClick={() => {
-                  isClickScrolling.current = true
-                  setActiveFolder(folder)
-                }}
-                aria-pressed={activeFolder === folder}
-              >
-                <FolderIcon />
-                <span className={styles.folderLabel}>{folder}</span>
-              </button>
-            ))}
+            {isMobile ? (
+              <div className={styles.mobileFolderMenu}>
+                <button
+                  type="button"
+                  className={`${styles.folderButton} ${styles.folderButtonActive}`}
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  aria-pressed={true}
+                >
+                  <FolderIcon />
+                  <span className={styles.folderLabel}>{activeFolder}</span>
+                  <span style={{ marginLeft: '0.5rem', display: 'flex', alignItems: 'center' }}>
+                    {menuOpen ? (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00ADF2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle' }}>
+                        <polyline points="18 15 12 9 6 15" />
+                      </svg>
+                    ) : (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00ADF2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle' }}>
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    )}
+                  </span>
+                </button>
+                {menuOpen && (
+                  <div className={styles.mobileDropdown}>
+                    {folders.filter(f => f !== activeFolder).map(folder => (
+                      <button
+                        key={folder}
+                        type="button"
+                        className={styles.folderButton}
+                        onClick={() => {
+                          isClickScrolling.current = true
+                          setActiveFolder(folder)
+                          setMenuOpen(false)
+                        }}
+                        aria-pressed={false}
+                      >
+                        <FolderIcon />
+                        <span className={styles.folderLabel}>{folder}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              folders.map(folder => (
+                <button
+                  key={folder}
+                  type="button"
+                  className={`${styles.folderButton} ${activeFolder === folder ? styles.folderButtonActive : ''}`}
+                  onClick={() => {
+                    isClickScrolling.current = true
+                    setActiveFolder(folder)
+                  }}
+                  aria-pressed={activeFolder === folder}
+                >
+                  <FolderIcon />
+                  <span className={styles.folderLabel}>{folder}</span>
+                </button>
+              ))
+            )}
           </nav>
 
           <section className={styles.contentArea}>
