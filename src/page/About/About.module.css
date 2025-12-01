@@ -6,9 +6,12 @@
 
 .mobileDropdown {
   overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.35s cubic-bezier(.4,0,.2,1);
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   max-height: 500px;
   opacity: 1;
+  transform: translateY(0);
   background: rgba(10,10,15,0.98);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
@@ -20,6 +23,7 @@
 .mobileDropdown[aria-hidden="true"] {
   max-height: 0;
   opacity: 0;
+  transform: translateY(-10px);
   pointer-events: none;
 }
 

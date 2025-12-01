@@ -421,20 +421,28 @@ export default function About() {
                   <FolderIcon />
                   <span className={styles.folderLabel}>{activeFolder}</span>
                   <span style={{ marginLeft: '0.5rem', display: 'flex', alignItems: 'center' }}>
-                    {menuOpen ? (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00ADF2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle' }}>
-                        <polyline points="18 15 12 9 6 15" />
-                      </svg>
-                    ) : (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00ADF2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle' }}>
-                        <polyline points="6 9 12 15 18 9" />
-                      </svg>
-                    )}
+                    <svg 
+                      width="18" 
+                      height="18" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="#00ADF2" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      style={{ 
+                        verticalAlign: 'middle',
+                        transform: menuOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
                   </span>
                 </button>
                 {menuOpen && (
                   <div className={styles.mobileDropdown}>
-                    {folders.filter(f => f !== activeFolder).map(folder => (
+                    {folders.filter(f => f !== activeFolder).map((folder, index) => (
                       <button
                         key={folder}
                         type="button"
@@ -445,6 +453,9 @@ export default function About() {
                           setMenuOpen(false)
                         }}
                         aria-pressed={false}
+                        style={{
+                          animation: `slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s both`
+                        }}
                       >
                         <FolderIcon />
                         <span className={styles.folderLabel}>{folder}</span>
